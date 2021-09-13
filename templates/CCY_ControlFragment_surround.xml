@@ -1,0 +1,44 @@
+<templateSet group="CCY_ControlFragment_surround">
+  <template name="jstryfj" value="try {&#10;    $SELECTION$$End$&#10;} catch (Exception e) {&#10;    e.printStackTrace();&#10;    JSUI.uiAlert(context, &quot;訊息&quot;, e.getMessage());&#10;} finally {&#10;    $varFinally$&#10;}" shortcut="TAB" description="" toReformat="false" toShortenFQNames="true">
+    <variable name="End" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="varFinally" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="true" />
+    </context>
+  </template>
+  <template name="jstryfk" value="try {&#10;    $SELECTION$$End$&#10;} catch (e: Exception) {&#10;    e.printStackTrace()&#10;    JSUI.uiAlert(context, &quot;getView&quot;, e.message)&#10;} finally {&#10;    $varFinally$&#10;}" shortcut="TAB" description="" toReformat="false" toShortenFQNames="true">
+    <variable name="End" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="varFinally" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="KOTLIN" value="true" />
+    </context>
+  </template>
+  <template name="jstryj" value="try {&#10;    $SELECTION$$End$&#10;} catch (Exception e) {&#10;    e.printStackTrace();&#10;    JSUI.uiAlert(context, &quot;訊息&quot;, e.getMessage());&#10;}" shortcut="TAB" description="" toReformat="false" toShortenFQNames="true">
+    <variable name="End" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="true" />
+    </context>
+  </template>
+  <template name="jstryk" value="try {&#10;    $SELECTION$$End$&#10;} catch (e: Exception) {&#10;    e.printStackTrace()&#10;    JSUI.uiAlert(context, &quot;getView&quot;, e.message)&#10;}" shortcut="TAB" description="" toReformat="false" toShortenFQNames="true">
+    <variable name="End" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="KOTLIN" value="true" />
+    </context>
+  </template>
+  <template name="jsforij" value="for(int $INDEX$ = 0; $INDEX$ &lt; $LIMIT$; $INDEX$++) {&#10;  $SELECTION$$End$&#10;}" description="" toReformat="false" toShortenFQNames="true">
+    <variable name="INDEX" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="LIMIT" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="End" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="true" />
+    </context>
+  </template>
+  <template name="jsforik" value="for ($INDEX$ in $indices$) {&#10;  $SELECTION$$End$&#10;}" description="" toReformat="false" toShortenFQNames="true">
+    <variable name="INDEX" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="indices" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="End" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="KOTLIN" value="true" />
+    </context>
+  </template>
+</templateSet>

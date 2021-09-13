@@ -1,0 +1,27 @@
+package ${PACKAGE_NAME}
+
+import com.jihsun.util.function.JSCheck
+import com.jihsun.util.function.JSLog
+
+#parse("File Header.java")
+
+/**
+ * 
+ */
+class ${NAME} {
+
+    companion object {
+
+        var TAG = "${NAME}"
+
+        fun verify(model: ($NAME.substring(8))SendModel) {
+
+            if (JSCheck.isEmpty(model.JS_T_WORD)) {
+                JSLog.logI(TAG, "JS_T_WORD is empty")
+                throw Exception("無法取得 Token")
+            }
+
+        }
+
+    }
+}

@@ -1,0 +1,63 @@
+package ${PACKAGE_NAME}
+import android.content.Context
+import com.jihsun.util.component.Download
+import com.jihsun.util.function.JSParser
+import com.js.online.privateclass.JSHost
+
+/**
+ * XML期貨(國內)_投資人資料變更處理
+ */
+abstract class ${NAME}(val context: Context, val model: ($NAME.substring(8))SendModel, private val extraMap: HashMap<String, String>) {
+
+    private val TAG = "${NAME}"
+
+    protected abstract fun onSuccess(data: String?, cacheFlag: Boolean?)
+    protected abstract fun onFail(data: String?)
+    protected abstract fun onCacheFile(data: String?)
+
+    var download: Download? = Download(context)
+
+    fun run() {
+
+        download!!.url = "${JSHost.getXMLHost(true)}XMLProcess.ashx"
+        download?.params = getParams()
+        download?.cacheMinute = 0
+        download?.timeOut = 30 * 1000
+        download?.charSet = "UTF8"
+        download?.defaultHeader = "text/json"
+        download?.setDataDownloadListener(object : Download.DataDownloadListener {
+
+            override fun success(data: String?, cacheFlag: Boolean?) {
+                onSuccess(data ?: "", cacheFlag)
+            }
+
+            override fun cacheFile(data: String?) {
+                onCacheFile(data ?: "")
+            }
+
+            override fun fail(data: String?) {
+                onFail(data ?: "")
+            }
+
+        })
+
+        download?.executeOnExecutor(java.util.concurrent.Executors.newCachedThreadPool())
+    }
+
+    fun cancel() {
+        download?.cancel(true)
+    }
+
+    private fun getParams(): HashMap<String, String> {
+        var params = HashMap<String, String>()
+
+        try {
+            params = JSParser.modelToMap(model)
+            params.putAll(extraMap)
+        } catch (e: Exception) {
+        }
+
+        return params
+    }
+
+}

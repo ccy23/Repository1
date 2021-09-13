@@ -1,0 +1,8 @@
+<templateSet group="CCY_XML">
+  <template name="jslin" value="&lt;LinearLayout&#10;    android:layout_width=&quot;fill_parent&quot;&#10;    android:layout_height=&quot;wrap_content&quot;&#10;    android:gravity=&quot;center&quot;&#10;    android:orientation=&quot;vertical&quot;&gt;&#10;&#9;&#9;&#10;&#9;&#9;$SELECTION$$End$&#10;&#9;&#9;&#10;&lt;/LinearLayout&gt;" description="LinearLayout-surround" toReformat="false" toShortenFQNames="true">
+    <variable name="End" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="XML" value="true" />
+    </context>
+  </template>
+</templateSet>

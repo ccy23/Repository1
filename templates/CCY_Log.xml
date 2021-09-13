@@ -1,0 +1,16 @@
+<templateSet group="CCY_Log">
+  <template name="jslogi" value="JSLog.logI(TAG, &quot;$logDesc$&quot;);" description="" toReformat="false" toShortenFQNames="true">
+    <variable name="logDesc" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="true" />
+      <option name="KOTLIN" value="true" />
+    </context>
+  </template>
+  <template name="jsloge" value="JSLog.logE(TAG, &quot;$logDesc$&quot;);" description="" toReformat="false" toShortenFQNames="true">
+    <variable name="logDesc" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="true" />
+      <option name="KOTLIN" value="true" />
+    </context>
+  </template>
+</templateSet>

@@ -1,0 +1,235 @@
+package privateclass.service
+
+import android.app.Activity
+import android.content.Intent
+import androidx.test.rule.ActivityTestRule
+import com.jihsun.util.function.JSCheck
+import com.jihsun.util.function.JSParser
+import com.js.online.MainActivity
+import com.js.online.privateclass.PT
+import org.junit.Assert
+import org.junit.Assert.assertEquals
+import org.junit.Assert.fail
+import org.junit.Rule
+import org.junit.Test
+import privateclass.service.$NAME.toLowerCase().Download${NAME}
+import privateclass.service.$NAME.toLowerCase().${NAME}Checker
+import privateclass.service.$NAME.toLowerCase().${NAME}SendModel
+import java.util.concurrent.CountDownLatch
+import java.util.concurrent.TimeUnit
+
+/**
+ *
+ *   電文測試: 功能:XML期貨(國內)_投資人資料變更處理
+ *
+ * */
+
+class Download${NAME}Test : BaseServiceTest() {
+
+    val TAG = "Download${NAME}Test"
+
+    @Rule
+    @JvmField
+    var mActivityRule: ActivityTestRule<*> = ActivityTestRule(MainActivity::class.java, false, false)
+
+    /**
+     * 透過Checker 驗證有問題的Model會報錯
+     */
+    @Test
+    override fun testChecker_fail() {
+
+        var isCorrect = true
+
+        try {
+            var model = ${NAME}SendModel()
+            model.WS_IB_NO = "A01" //分公司
+            model.WS_INVESTOR_ACNO = "" //期貨帳號  9840110
+            model.JS_WORD = JS_WORD //交易密碼
+            model.TRANS_CODE = "11" //異動類別{11: 期貨網路 12: E-Agent 13: 證券網路 14: 前台系統查詢(與個資相關之欄位不回覆)}
+            model.WS_INFO_API_FLAG = "Y" //行情API註記簽署
+            model.FUNCTION_CODE = "15" //功能代碼
+
+            ${NAME}Checker.verify(model)
+
+        } catch (e: Exception) {
+            isCorrect = false
+        }
+
+        assertEquals(false, isCorrect)
+
+    }
+
+    /**
+     * 透過Checker 驗證合法的Model會PASS
+     */
+    @Test
+    override fun testChecker_success() {
+
+        var isCorrect = true
+
+        try {
+            var model = ${NAME}SendModel()
+            model.WS_IB_NO = "A01" //分公司
+            model.WS_INVESTOR_ACNO = WS_ACNO //期貨帳號
+            model.JS_WORD = JS_WORD //交易密碼
+            model.TRANS_CODE = "11" //異動類別{11: 期貨網路 12: E-Agent 13: 證券網路 14: 前台系統查詢(與個資相關之欄位不回覆)}
+            model.WS_INFO_API_FLAG = "Y" //行情API註記簽署
+            model.FUNCTION_CODE = "15" //功能代碼
+
+            ${NAME}Checker.verify(model)
+
+        } catch (e: Exception) {
+            isCorrect = false
+        }
+
+        assertEquals(true, isCorrect)
+
+    }
+
+    /**
+     * 驗證Service 回傳失敗情境
+     */
+    @Test
+    override fun testService_fail() {
+        // 增加Thread Lock的機制
+        val countDownLatch = CountDownLatch(1)
+        val activity: Activity = mActivityRule.launchActivity(Intent())
+
+        // 步驟 1: crate model
+        var model = ${NAME}SendModel()
+        model.WS_IB_NO = "A01" //分公司
+        model.WS_INVESTOR_ACNO = "9840110000000" //期貨帳號 9840110
+        model.JS_WORD = JS_WORD //交易密碼
+        model.TRANS_CODE = "11" //異動類別{11: 期貨網路 12: E-Agent 13: 證券網路 14: 前台系統查詢(與個資相關之欄位不回覆)}
+        model.WS_INFO_API_FLAG = "Y" //行情API註記簽署
+        model.FUNCTION_CODE = "15" //功能代碼
+
+        try {
+
+            // 步驟 2: check model
+            ${NAME}Checker.verify(model)
+
+            // 步驟 3: verify api result
+            var rawData: String? = null
+            val extraMap = testLoginMap
+            extraMap.putAll(...);
+
+            var download = object : Download${NAME}(activity, model, extraMap) {
+
+                override fun onSuccess(data: String?, cacheFlag: Boolean?) {
+                    rawData = data
+                    countDownLatch.countDown()
+                }
+
+                override fun onFail(data: String?) {
+                    rawData = data
+                    countDownLatch.countDown()
+                    PT.logI(TAG, "onFail data:$data")
+                }
+
+                override fun onCacheFile(data: String?) {
+                    PT.logI(TAG, "onCacheFile data:$data")
+                }
+            }
+
+            download.run()
+
+            // 步驟 4, 驗證CODE改到這裡做，避免fail時，導致中斷剩餘測項
+            countDownLatch.await(30, TimeUnit.SECONDS)
+
+            // data = {"WR_REPLY_CODE":"999","WR_ADVISORY":"抱歉你沒有使用權限"}
+            val responseMap = JSParser.jsonToMap(rawData, "")
+            assertEquals(rawData, true, !JSCheck.isEmpty(responseMap))
+
+            responseMap?.run {
+
+                val resultMap = responseMap["DATA"]
+                PT.logI(TAG, "onSuccess resultMap:$resultMap")
+                assertEquals(rawData, false, !JSCheck.isEmpty(resultMap))
+
+                val replyCode = responseMap["WR_REPLY_CODE"]
+                assertEquals(rawData, false, PT.isEqual(replyCode, "0"))
+
+            }
+
+        } catch (e: java.lang.Exception) {
+            e.printStackTrace()
+            fail("Should not have thrown any exception")
+        }
+
+    }
+
+    /**
+     * 驗證Service 回傳成功情境
+     */
+    @Test
+    override fun testService_success() {
+        // 增加Thread Lock的機制
+        val countDownLatch = CountDownLatch(1)
+        val activity: Activity = mActivityRule.launchActivity(Intent())
+
+        // 步驟 1: crate model
+        var model = ${NAME}SendModel()
+        model.WS_IB_NO = "A01" //分公司
+        model.WS_INVESTOR_ACNO = WS_ACNO //期貨帳號
+        model.JS_WORD = JS_WORD //交易密碼
+        model.TRANS_CODE = "11" //異動類別{11: 期貨網路 12: E-Agent 13: 證券網路 14: 前台系統查詢(與個資相關之欄位不回覆)}
+        model.WS_INFO_API_FLAG = "Y" //行情API註記簽署
+        model.FUNCTION_CODE = "15" //功能代碼
+
+        try {
+
+            // 步驟 2: check model
+            ${NAME}Checker.verify(model)
+
+            // 步驟 3: verify api result
+            var rawData: String? = null
+            val extraMap = testLoginMap
+            extraMap.putAll(...);
+
+            var download = object : Download${NAME}(activity, model, extraMap) {
+                override fun onSuccess(data: String?, cacheFlag: Boolean?) {
+                    rawData = data
+                    countDownLatch.countDown()
+                }
+
+                override fun onFail(data: String?) {
+                    rawData = data
+                    countDownLatch.countDown()
+                    PT.logI(TAG, "onFail data:$data")
+                }
+
+                override fun onCacheFile(data: String?) {
+                    PT.logI(TAG, "onCacheFile data:$data")
+                }
+            }
+            download.run()
+
+            // 步驟 4, 驗證CODE改到這裡做，避免fail時，導致中斷剩餘測項
+            countDownLatch.await(30, TimeUnit.SECONDS)
+
+            var responseMap = JSParser.jsonToMap(rawData, "")
+            assertEquals(rawData, true, !JSCheck.isEmpty(responseMap))
+
+            responseMap?.run {
+                val resultMap = responseMap["DATA"]
+                val wrADVISORY = responseMap["WR_ADVISORY"]
+                PT.logI(TAG, "onSuccess resultMap:$resultMap")
+                assertEquals(rawData, true, !JSCheck.isEmpty(resultMap) || !JSCheck.isEmpty(wrADVISORY))
+
+                val replyCode = responseMap["WR_REPLY_CODE"]
+
+                // WR_REPLY_CODE = "0";
+                Assert.assertTrue(rawData, PT.isEqual(replyCode, "0") )
+                );
+
+            }
+
+        } catch (e: java.lang.Exception) {
+            e.printStackTrace()
+            fail("Should not have thrown any exception")
+        }
+    }
+
+
+}

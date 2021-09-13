@@ -1,0 +1,7 @@
+<templateSet group="CCY">
+  <template name="ttt1" value="#parse(&quot;File Header.java&quot;)&#10;&#10;aaa" description="" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+</templateSet>

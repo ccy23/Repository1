@@ -1,0 +1,17 @@
+<templateSet group="CCY_JavaDoc">
+  <template name="jsjdoch" value="/**&#10; * @description $End$&#10; * &#10; * @author Jason Yeh&#10; * @date $date$&#10; */" description="Java Doc - header" toReformat="false" toShortenFQNames="true">
+    <variable name="End" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="date" expression="date()" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="true" />
+      <option name="KOTLIN" value="true" />
+    </context>
+  </template>
+  <template name="jsjdochb" value="/**&#10; * @description $End$&#10; * &#10; */" description="Java Doc - header" toReformat="false" toShortenFQNames="true">
+    <variable name="End" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="true" />
+      <option name="KOTLIN" value="true" />
+    </context>
+  </template>
+</templateSet>

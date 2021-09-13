@@ -1,0 +1,60 @@
+<templateSet group="CCY_ControlFragment">
+  <template name="jsforj" value="for(int $var1$=0; $var1$&lt;$var2$; $var1$++){&#10;    $END$&#10;}" description="" toReformat="false" toShortenFQNames="true">
+    <variable name="var1" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="var2" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="true" />
+    </context>
+  </template>
+  <template name="jsauthor" value="@author - My Name" description="" toReformat="false" toShortenFQNames="true" deactivated="true">
+    <context>
+      <option name="JAVA_CODE" value="true" />
+      <option name="KOTLIN" value="true" />
+    </context>
+  </template>
+  <template name="jswhen" value="when ($position$) {&#10;    0 -&gt; {&#10;        $var0$&#10;    }&#10;    1 -&gt; {&#10;        $var1$&#10;    }&#10;}" description="" toReformat="false" toShortenFQNames="true">
+    <variable name="position" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="var0" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="var1" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="KOTLIN" value="true" />
+    </context>
+  </template>
+  <template name="jswhile" value="while ($index$ &gt; 0) {&#10;    $SELECTION$$var1$&#10;}" description="" toReformat="false" toShortenFQNames="true">
+    <variable name="index" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="var1" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="true" />
+    </context>
+  </template>
+  <template name="jsforjt" value="for($EXPR_COPY$ item : $EXPR$){&#10;    $END$&#10;}" description="" toReformat="false" toShortenFQNames="true">
+    <variable name="EXPR_COPY" expression="componentTypeOf(typeOfVariable(EXPR))" defaultValue="" alwaysStopAt="true" />
+    <variable name="EXPR" expression="variableOfType(&quot;&quot;)" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="true" />
+    </context>
+  </template>
+  <template name="jstopj" value="String s1 = ($exp1$) ? $value1$ : $value2$;" description="三元表達式" toReformat="false" toShortenFQNames="true">
+    <variable name="exp1" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="value1" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="value2" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="true" />
+    </context>
+  </template>
+  <template name="jstopk" value="var tText = if($express$) $val1$ else $val2$" description="三元表達式" toReformat="false" toShortenFQNames="true">
+    <variable name="express" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="val1" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="val2" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="KOTLIN" value="true" />
+    </context>
+  </template>
+  <template name="jsp" value="$EXPR$" description="取得方法param" toReformat="false" toShortenFQNames="true">
+    <variable name="EXPR" expression="variableOfType(&quot;&quot;)" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="true" />
+      <option name="KOTLIN" value="true" />
+    </context>
+  </template>
+</templateSet>
