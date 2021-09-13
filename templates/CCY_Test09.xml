@@ -1,0 +1,32 @@
+<templateSet group="CCY_Test09">
+  <template name="jsbuialert2" value=" BUIAlert buiAlert = new BUIAlert(context, R.style.MyDialog);&#10;                    buiAlert.setTitle(context.getString(R.string.app_name));&#10;                    buiAlert.setMessage(message);&#10;&#10;                    buiAlert.setButton_title(new String[]{&quot;取消&quot;, &quot;確定&quot;});&#10;                    buiAlert.setBUIAlertListener(new BUIAlert.BUIAlertListener() {&#10;                        @Override&#10;                        public boolean onItemClick(int position) {&#10;&#10;                            switch (position) {&#10;                                case 0:&#10;                                    result.cancel();&#10;                                    break;&#10;                                case 1:&#10;                                    result.confirm();&#10;                                    break;&#10;                            }&#10;&#10;&#10;                            return true;&#10;                        }&#10;                    });&#10;                    buiAlert.show();" description="BuiAlert 2個按鈕" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_CODE" value="true" />
+    </context>
+  </template>
+  <template name="jsbuialert1" value="BUIAlert buiAlert = new BUIAlert(context);&#10;&#10;buiAlert.setTitle(context.getString(R.string.app_name));&#10;buiAlert.setMessage(message);&#10;buiAlert.setCancelable(false);&#10;&#10;buiAlert.setButton_title(new String[]{&quot;OK&quot;});&#10;buiAlert.setBUIAlertListener(new BUIAlert.BUIAlertListener() {&#10;    @Override&#10;    public boolean onItemClick(int position) {&#10;        result.confirm();&#10;        return true;&#10;    }&#10;});&#10;&#10;buiAlert.show();" description="BuiAlert 1個按鈕" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_CODE" value="true" />
+    </context>
+  </template>
+  <template name="jsdialogpwd" value="Dialog_Pwd pwdDialog = new Dialog_Pwd(context);&#10;        pwdDialog.message = sb.toString();&#10;        pwdDialog.webUrl = BuildConfig.JSMARKET_HOST + &quot;jsoutsidessell/PhoneEDM/OptionCS-AQREE.html&quot;;&#10;        pwdDialog.title = &quot;選擇權注意事項&quot;;&#10;        pwdDialog.bgColor = (radio_buy.isChecked() ? context.getResources().getColor(R.color.buy_bg) : context.getResources().getColor(R.color.sell_bg));&#10;        pwdDialog.onclick = new OnClickListener() {&#10;&#10;            @Override&#10;            public void onClick(View vv) {&#10;                // JSLog.print(&quot;PasswordDialog onClick()&quot;);&#10;                convertView.findViewById(R.id.layout_order2_3).requestFocus();&#10;&#10;                downloadSmartOrder(sb.toString(), (String) vv.getTag());&#10;//                sendArea(sb.toString(), (String) vv.getTag());&#10;            }&#10;        };&#10;        pwdDialog.show();" description="Dialog_Pwd" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_CODE" value="true" />
+    </context>
+  </template>
+  <template name="jsdialogpwdk" value=" Dialog_Pwd pwdDialog = new Dialog_Pwd(context);&#10;        pwdDialog.message = sb.toString();&#10;        pwdDialog.webUrl = BuildConfig.JSMARKET_HOST + &quot;jsoutsidessell/PhoneEDM/OptionCS-AQREE.html&quot;;&#10;        pwdDialog.title = &quot;選擇權注意事項&quot;;&#10;        pwdDialog.bgColor = (radio_buy.isChecked() ? context.getResources().getColor(R.color.buy_bg) : context.getResources().getColor(R.color.sell_bg));&#10;        pwdDialog.onclick = new OnClickListener() {&#10;&#10;            @Override&#10;            public void onClick(View vv) {&#10;                // JSLog.print(&quot;PasswordDialog onClick()&quot;);&#10;                convertView.findViewById(R.id.layout_order2_3).requestFocus();&#10;&#10;                downloadSmartOrder(sb.toString(), (String) vv.getTag());&#10;//                sendArea(sb.toString(), (String) vv.getTag());&#10;            }&#10;        };&#10;        pwdDialog.show();" description="Dialog_Pwd(kt)" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="KOTLIN" value="true" />
+    </context>
+  </template>
+  <template name="jsbuialert1k" value="            val showPatternAlertDialog = BUIAlert(activity)&#10;            showPatternAlertDialog.screenWidthPercent = 90.0f&#10;            showPatternAlertDialog.setCancelable(false)&#10;            showPatternAlertDialog.setTitle(&quot;快速圖形登入&quot;)&#10;            showPatternAlertDialog.setView(patternView)&#10;            showPatternAlertDialog.setButton_title(arrayOf(&quot;取消&quot;))&#10;            showPatternAlertDialog.setBUIAlertListener { position -&gt;&#10;                if (position == 0) {&#10;&#10;                }&#10;                true&#10;            }&#10;            showPatternAlertDialog.show()" description="BuiAlert 1個按鈕(kt)" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="KOTLIN" value="true" />
+    </context>
+  </template>
+  <template name="jsbuialert2k" value="val buiAlert = BUIAlert(context)&#10;buiAlert.setTitle(&quot;登出&quot;)&#10;buiAlert.setMessage(context.getString(R.string.remove_msg4))       //當內容是只顯示文字時用這行&#10;buiAlert.setButton_title(arrayOf(&quot;我還要繼續使用&quot;, &quot;立即結束程式&quot;))&#10;buiAlert.setBUIAlertListener { position -&gt;&#10;    if (position == 0) {&#10;        //call api;&#10;    } else if (position == 1) {&#10;        try {&#10;            PTTransLogin.downloadLogout(this)&#10;        } catch (e: SecurityException) {&#10;            //                                JSUI.uiAlert(context, &quot;權限不足&quot;, &quot;請同意電話權限&quot;);&#10;            //                                JSUI.uiAlert(NotifyVerticalActivity.this, &quot;權限不足&quot;, &quot;請同意電話權限&quot;);&#10;        }&#10;    }&#10;    true&#10;}&#10;buiAlert.show()" description="BuiAlert 2個按鈕(kt)" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_CODE" value="true" />
+    </context>
+  </template>
+</templateSet>
