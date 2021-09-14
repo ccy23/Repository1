@@ -1,0 +1,7 @@
+<templateSet group="CCY_AAA">
+  <template name="asdfdsafdsaf" value="sdafdsa" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="KOTLIN" value="true" />
+    </context>
+  </template>
+</templateSet>
